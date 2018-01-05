@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "按下了取消", Toast.LENGTH_SHORT).show();
             }
         });
+
+        builder.setNeutralButton("Help", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(MainActivity.this, "按下了Help", Toast.LENGTH_SHORT).show();
+            }
+        });
         
         builder.show();
     }
