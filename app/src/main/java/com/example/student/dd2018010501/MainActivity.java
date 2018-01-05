@@ -4,7 +4,10 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     int ch;
     int tmp;
+    boolean[] chks = new boolean[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +125,71 @@ public class MainActivity extends AppCompatActivity {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        builder.show();
+    }
+
+    public void click5(View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("多選項列表");
+        final TextView tv4 = findViewById(R.id.textView4);
+        final String[] fruits = new String[] {"鳳梨", "梨子", "蘋果", "西瓜", "蓮霧", "芭樂"};
+        builder.setMultiChoiceItems(fruits, chks, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+
+            }
+        });
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < 6; i++)
+                {
+                    if (chks[i])
+                    {
+                        sb.append(fruits[i] + ",");
+                    }
+                }
+                tv4.setText(sb.toString());
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void click6(View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("自訂");
+        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+        View v1 = inflater.inflate(R.layout.layout,null);
+        builder.setView(v1);
+        final TextView tv = v1.findViewById(R.id.textView6);
+        Button btn = v1.findViewById(R.id.button7);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tv.setText("Hello");
+            }
+        });
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int position) {
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
         builder.show();
