@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-
+    int ch;
+    int tmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Title");
-
         final TextView tv = findViewById(R.id.textView);
         final EditText td = new EditText(MainActivity.this);
         builder.setView(td);
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Toast.makeText(MainActivity.this, "按下了確定", Toast.LENGTH_SHORT).show();
-
                 tv.setText(td.getText().toString());
             }
         });
@@ -82,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("列表");
-
         final TextView tv2 = findViewById(R.id.textView2);
-
         final String[] fruits = new String[] {"鳳梨", "蘋果", "西瓜", "蓮霧"};
         builder.setItems(fruits, new DialogInterface.OnClickListener() {
             @Override
@@ -99,6 +95,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.setCancelable(false);
+        builder.show();
+    }
+
+    public void click4(View v)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("單選項列表");
+        final TextView tv3 = findViewById(R.id.textView3);
+        final String[] fruits = new String[] {"鳳梨", "蘋果", "西瓜", "蓮霧"};
+        builder.setSingleChoiceItems(fruits, ch, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                tmp = i;
+            }
+        });
+        builder.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ch = tmp;
+                tv3.setText(fruits[ch]);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
         builder.show();
     }
 }
